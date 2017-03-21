@@ -41,7 +41,7 @@ var source = require("./rome.json");
 
 var talks = new Array(source.talks.length);
 
-var TZoffset = 2; // for Rome
+var TZoffset = 1; // UTC + 1 for Rome
 source.talks.forEach(function (item, index) {
     var event = {};
     event.id = item.id;
@@ -56,14 +56,17 @@ source.talks.forEach(function (item, index) {
     event.level = item.level; // Beginner, Intermediate
     
     event.beginDate = new Date(item.date+"T"+item.starttime+".000Z");
-    var beginDateLocal = new Date(event.beginDate.getTime() + 3600000*TZoffset);
+    var beginDateLocal = new Date(event.beginDate.getTime() - 3600000*TZoffset);
     event.beginDay = weekday(beginDateLocal.getDay());
     event.beginTime = item.starttime.substring(0, 5);
+    event.beginDate = beginDateLocal;
 
     event.endDate = new Date(item.date+"T"+item.endtime+".000Z");
-    var endDateLocal = new Date(event.endDate.getTime() + 3600000*TZoffset);
+    var endDateLocal = new Date(event.endDate.getTime() - 3600000*TZoffset);
     event.endDay = weekday(endDateLocal.getDay());
     event.endTime = item.endtime.substring(0, 5);
+    event.endDate = endDateLocal;
+
     event.duration = displayedDuration((event.endDate.getTime() - event.beginDate.getTime()) / 1000 / 60);
     talks[index] = event;
 });
@@ -82,11 +85,16 @@ module.exports = {
     },
 
     findNext: function (req, res) {
-        var now = new Date(Date.now());
-        now = new Date(now.getTime() + (1000 * 3600));
-
+        var now = req.param('date');
+        if (!now) {
+            now = new Date(Date.now());
+        }
+        else {
+            now = new Date(now);
+        }
+        
         // set limit
-        var limit = req.param('limit');
+        var limit = req.param('max');
         if (!limit) {
             limit = 10;
         }
@@ -106,15 +114,14 @@ module.exports = {
 
     findCurrent: function (req, res) {
         // check if there is a date specified
-        var now = req.param('now');
+        var now = req.param('date');
         if (!now) {
             now = new Date(Date.now());
         }
         else {
             now = new Date(now);
         }
-        now = new Date(now.getTime() + (1000 * 3600));
-
+        
         var events = [];
         sorted.forEach(function (item) {
             if ((now >= item.beginDate) && (now < item.endDate)) {
