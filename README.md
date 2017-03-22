@@ -10,8 +10,8 @@ This code loads the Code Motion Rome conference JSON and exposes the talks as a 
 
 Note that the `date` & `max` query parameters apply to both /next and /now resources.
 
-Brought to you by the [DevNet team](https://developer.cisco.com) and [Heroku Free Dynos](https://devcenter.heroku.com/articles/free-dyno-hours) 
-leave about 30s for the API to wake if it has not been invoked for the last 30 minutes.
+Brought to you by the [Cisco DevNet team](https://developer.cisco.com) and [Heroku Free Dynos](https://devcenter.heroku.com/articles/free-dyno-hours): 
+leave about 30s for the API to wake up if it has not been invoked during the last 30 minutes.
 
 **If you're attending the CodeMotion conference on March 24,25th, 
 check [Cisco's presence](https://github.com/CiscoDevNet/codemotion-rome-2017): 
