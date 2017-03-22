@@ -1,7 +1,7 @@
 {
   "name": "codemotion-rome-2017-api",
   "version": "0.1.0",
-  "description": "Event API for Code motion Rome 2017",
+  "description": "Event API for CodeMotion Rome 2017",
   "keywords": [
   ],
   "dependencies": {
