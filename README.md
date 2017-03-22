@@ -3,12 +3,12 @@
 This code loads the Code Motion Rome conference JSON and exposes the talks as a REST API:
 
 - [GET /](https://codemotion-rome-2017.herokuapp.com/) : returns all events, sorted by date ASC
-- [GET /next](https://codemotion-rome-2017.herokuapp.com/next?max=10): shows upcoming activities from now (now being the exact moment when the request is issued)
+- [GET /next](https://codemotion-rome-2017.herokuapp.com/next): shows upcoming activities from now (now being the exact moment when the request is issued)
 - [GET /now](https://codemotion-rome-2017.herokuapp.com/now) : returns events happening now (now being the exact moment when the request is issued)
 - [GET /now?date=2017-03-24T09:41:00.000Z](https://codemotion-rome-2017.herokuapp.com/next?date=2017-03-24T09:41:00.000Z) : returns events happening after the specified date (in order to simulate how the API will behave in a few hours/days)
-- [GET /next?max=20](https://codemotion-rome-2017.herokuapp.com/next?max)20 : returns the next 20 upcoming events 
+- [GET /next?max=20](https://codemotion-rome-2017.herokuapp.com/next?max=20) : returns the next 20 upcoming events 
 
-Note that the date & max query parameters apply to both /next and /now resources.
+Note that the `date` & `max` query parameters apply to both /next and /now resources.
 
 Brought to you by the [DevNet team](https://developer.cisco.com) and [Heroku Free Dynos](https://devcenter.heroku.com/articles/free-dyno-hours) 
 leave about 30s for the API to wake if it has not been invoked for the last 30 minutes.
